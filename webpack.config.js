@@ -1,16 +1,17 @@
-path = require("path");
+const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: "production",
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: {
+    index: path.resolve(__dirname, 'src/index.js'),
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
-    chunkFilename: "[id].css"
+    filename: '[name]-[contenthash:8].js',
   },
   module: {
     rules: [
@@ -25,18 +26,28 @@ module.exports = {
       },
       {
         test: /\.css$|\.scss$/,
-				// use: ['style-loader', 'css-loader', 'sass-loader']
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: ['css-loader', 'sass-loader']
-				})
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
-    new ExtractTextPlugin({
-      filename: 'style.css'
+    new MiniCssExtractPlugin({
+      filename: 'style-[contenthash:8].css'
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -45,7 +56,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: path.join(__dirname, '/static/*'), to: path.join(__dirname, 'dist/'), ignore: ['.*'] }
-    ])
+    ]),
+    new CleanWebpackPlugin("dist"),
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),
