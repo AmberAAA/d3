@@ -1,3 +1,25 @@
-body {
-  margin: 0;
+/* DMOE1 */
+.chart{
+  div{
+    font: 10px sans-serif;
+    background: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+  }
+}
+/* DEMO2 */
+.chart-svg{
+    g{
+        fill: steelblue;
+    }
+    rect{
+        fill: steelblue
+    }
+    text{
+        text-anchor: end;
+        fill: white;
+        font: 10px sans-serif;
+    }
 }
