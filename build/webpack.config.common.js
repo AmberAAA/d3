@@ -41,6 +41,10 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: path.resolve(__dirname, '../static/*'), to: path.resolve(__dirname, '../dist/'), ignore: ['.*'] }
     ]),
-    new CleanWebpackPlugin("dist"),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, "../"),
+      dry: false,
+      verbose: true
+    }),
   ]
 }
