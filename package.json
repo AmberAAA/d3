@@ -6,8 +6,8 @@
   "author": "AmberAAA <qe-d@163.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack-cli",
-    "start": "webpack-dev-server --open",
+    "build": "webpack-cli --config build/webpack.config.prod.js",
+    "start": "webpack-dev-server --config build/webpack.config.dev.js --inline",
     "lint": "eslint --ext .js src --fix"
   },
   "devDependencies": {
@@ -25,7 +25,8 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "d3": "^5.7.0"

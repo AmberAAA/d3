@@ -2,10 +2,8 @@ import * as d3 from "d3";
 import "./index.scss";
 
 
-
 /*
   DEMO2 start
-
 */
 
 const demo2 = {
