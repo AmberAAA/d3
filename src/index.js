@@ -1,45 +1,60 @@
 import * as d3 from "d3";
 import "./index.scss";
 import data_set from "@observablehq/alphabet";
-
+import "./demo5";
+window.d3 = d3;
 /*
     DEMO4 start
  */
 
 const demo4 = {
-    width: 560,
-    height: 320,
+    chart_width: 640,
+    chart_height: 480,
+    margin: 30,
     data: data_set.sort((a, b) => b.frequency - a.frequency)
 };
 
-demo4.bar_width = demo4.width / demo4.data.length;
+demo4.bar_width = (demo4.chart_width - demo4.margin * 2) / demo4.data.length;
 
-demo4.y = d3.scaleLinear().range([demo4.height - 100, 0]).domain([0, d3.max(demo4.data, d => d.frequency)]);
+demo4.y = d3.scaleLinear().range([demo4.chart_height + demo4.margin, demo4.margin]).domain([0, d3.max(demo4.data, d => d.frequency)]).nice();
 
-window.a = demo4;
+demo4.x = d3.scaleBand().domain(demo4.data.map(item => item.letter)).range([demo4.margin, demo4.margin + demo4.chart_width]).padding(0.1);
 
 const demo4_chart = d3
     .select(".chart-svg-3")
-    .attr("height", demo4.height)
-    .attr("width", demo4.width);
+    .attr("height", demo4.chart_height + demo4.margin * 2)
+    .attr("width", demo4.chart_width + demo4.margin * 2);
 
 const demo4_bar = demo4_chart
     .selectAll("g")
     .data(demo4.data)
     .enter()
     .append("g")
-    .attr("transform", (d, i) => `translate(${+i * +demo4.bar_width},0)`)
+    // .attr("transform", (d, i) => `translate(${+i * +demo4.bar_width},0)`)
+    .attr("transform", (d) => `translate(${demo4.x(d.letter)},0)`);
 
 demo4_bar.append("rect")
     .attr("y", d => demo4.y(d.frequency))
-    .attr("height", d => demo4.height - demo4.y(d.frequency))
+    .attr("height", d => demo4.chart_height + demo4.margin - demo4.y(d.frequency))
     .attr("width", demo4.bar_width -1);
 
-demo4_bar.append("text")
-    .attr("x", demo4.bar_width/2)
-    .attr("y", d => demo4.y(d.frequency) + 3)
-    .attr("dy", "0.75em")
-    .text(d => d.letter);
+const xAxis = d3.axisBottom(demo4.x).tickSizeOuter(0);
+
+const yAxis = d3.axisLeft(demo4.y);
+
+demo4_chart
+    .append("g")
+    .attr("class", "x-axis")
+    .attr("transform", `translate(0, ${demo4.chart_height + demo4.margin})`)
+    .call(xAxis);
+
+demo4_chart
+    .append("g")
+    .attr("class", "x-axis")
+    .attr("transform", `translate(${demo4.margin}, 0)`)
+    .call(yAxis)
+    .call(g => g.select(".domain").remove());
+
 
 /*
   DEMO3 start

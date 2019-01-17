@@ -1,23 +1,54 @@
-/* DMOE1 */
-.chart{
-  div{
-    font: 10px sans-serif;
-    background: steelblue;
-    text-align: right;
-    padding: 3px;
-    margin: 1px;
-    color: white;
-  }
+/* DEMO5 */
+.svg-update {
+    text {
+        font: bold 48px monospace;
+    }
+
+    .enter {
+        fill: green;
+    }
+
+    .update {
+        fill: #333;
+    }
+
+    .exit {
+        fill: brown;
+    }
 }
+
+/* DEMO4 */
+.chart-svg .x-axis {
+    fill: transparent;
+
+    text {
+        fill: black;
+    }
+}
+
+/* DMOE1 - DMOE4 */
+.chart {
+    div {
+        font: 10px sans-serif;
+        background: steelblue;
+        text-align: right;
+        padding: 3px;
+        margin: 1px;
+        color: white;
+    }
+}
+
 /* DEMO2 */
-.chart-svg{
-    g{
+.chart-svg {
+    g {
         fill: steelblue;
     }
-    rect{
+
+    rect {
         fill: steelblue
     }
-    text{
+
+    text {
         text-anchor: end;
         fill: white;
         font: 10px sans-serif;
