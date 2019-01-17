@@ -29,6 +29,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@observablehq/alphabet": "^0.0.0",
     "d3": "^5.7.0"
   }
 }
