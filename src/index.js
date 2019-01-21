@@ -2,6 +2,8 @@ import * as d3 from "d3";
 import "./index.scss";
 import data_set from "@observablehq/alphabet";
 import "./demo5";
+import "./demo6";
+
 window.d3 = d3;
 /*
     DEMO4 start
