@@ -3,6 +3,8 @@ import "./index.scss";
 import data_set from "@observablehq/alphabet";
 import "./demo5";
 import "./demo6";
+import "./demo7";
+import "./gdp";
 
 window.d3 = d3;
 /*

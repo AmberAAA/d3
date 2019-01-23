@@ -4,7 +4,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 const height = 480;
 
-const svg = d3.select("svg")
+const svg = d3.select(".svg-update-2")
     .attr("height", 480)
     .attr("width", 640);
 
