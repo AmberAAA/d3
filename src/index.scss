@@ -54,3 +54,14 @@
         font: 10px sans-serif;
     }
 }
+
+
+#demo-8 svg text {
+    text-anchor: end;
+    fill: white;
+    font: 10px sans-serif;
+}
+
+#demo-8 svg .tick text {
+    fill: steelblue;
+}
