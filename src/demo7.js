@@ -20,7 +20,7 @@ const tr = table.selectAll("tr")
     .enter()
     .append("tr");
 
-const td = tr.selectAll("td")
+tr.selectAll("td")
     .data(d => d)
     .enter()
     .append("td")

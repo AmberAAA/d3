@@ -39,7 +39,7 @@ function draw (data) {
 
     const x = d3.scaleLinear().range([config.margin, config.width + config.margin]).domain([0, d3.max(data, d => d.Value)]);
     const y = d3.scaleBand().domain(data.map( d => d["Country Code"])).range([config.margin, config.margin + config.maxSize * config.barHeight]).padding(0.1);
-    console.log(y("USA"))
+
     const xAxis = d3.axisBottom(x).tickSizeOuter(0);
     const yAxis = d3.axisLeft(y).tickSizeOuter(0);
     // d3.scaleBand().domain(demo4.data.map(item => item.letter)).range([demo4.margin, demo4.margin + demo4.chart_width]).padding(0.1)
@@ -60,23 +60,23 @@ function draw (data) {
         .append("g")
         .attr("transform", (d, i) => `translate(0, ${config.barHeight * i + config.margin})`);
 
-    const rect = g.append("rect")
+    g.append("rect")
         .attr("width", d => x(d.Value) - config.margin)
         .attr("x", config.margin)
         .attr("height", config.barHeight - 2)
-        .attr("fill", "steelblue")
+        .attr("fill", "steelblue");
 
-    const text = g.append("text")
+    g.append("text")
         .attr("x", d => x(d.Value))
         .attr("y",  12)
         .attr("dx", "-.3em")
-        .text(d => d["Country Code"])
+        .text(d => d["Country Code"]);
 
     svg.append("g")
         .attr("class", "x-axis")
         // .attr("transform", `translate(${demo4.margin}, 0)`)
-        .call(xAxis)
-        // .call(g => g.select(".domain").remove());
+        .call(xAxis);
+    // .call(g => g.select(".domain").remove());
 
 
     svg.append("g")
